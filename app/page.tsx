@@ -1,9 +1,14 @@
-import { connection } from "next/server"
-
 import { PageInner } from "@/components/mvd/page-inner"
 
-export default async function Page() {
-  await connection()
+type PageProps = {
+  searchParams: Promise<{
+    section?: string | string[]
+  }>
+}
 
-  return <PageInner />
+export default async function Page({ searchParams }: PageProps) {
+  const params = await searchParams
+  const rawSection = Array.isArray(params.section) ? params.section[0] : params.section
+
+  return <PageInner initialSlug={rawSection ?? null} />
 }

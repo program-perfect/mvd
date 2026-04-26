@@ -12,47 +12,75 @@ import { SystemHeader } from "@/components/mvd/system-header"
 import { WantedSection } from "@/components/mvd/wanted-section"
 import { WeaponsSection } from "@/components/mvd/weapons-section"
 import { DEFAULT_SECTION, SECTIONS, findSection } from "@/lib/mvd/sections-meta"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 const PARAM = "section"
 
-export function PageInner() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+type PageInnerProps = {
+  initialSlug?: string | null
+}
 
-  const initialSlug = searchParams.get(PARAM)
+export function PageInner({ initialSlug = null }: PageInnerProps) {
   const initialSection = findSection(initialSlug) ?? DEFAULT_SECTION
 
   const [sectionId, setSectionId] = useState<SectionId>(initialSection.id)
   const [highlightSuspectId, setHighlightSuspectId] = useState<string | null>(null)
 
-  // Синхронизация: при изменении URL извне — обновляем активный раздел
+  // Один раз после загрузки читаем текущий URL.
+  // Это нужно, если PageInner пока вызывается без initialSlug.
   useEffect(() => {
-    const slug = searchParams.get(PARAM)
-    const sec = findSection(slug)
-    if (sec && sec.id !== sectionId) {
-      setSectionId(sec.id)
+    const params = new URLSearchParams(window.location.search)
+    const urlSection = findSection(params.get(PARAM)) ?? DEFAULT_SECTION
+
+    setSectionId((current) => (current === urlSection.id ? current : urlSection.id))
+  }, [])
+
+  // Поддержка кнопок браузера "назад/вперёд"
+  useEffect(() => {
+    function handlePopState() {
+      const params = new URLSearchParams(window.location.search)
+      const urlSection = findSection(params.get(PARAM)) ?? DEFAULT_SECTION
+
+      setSectionId(urlSection.id)
+
+      if (urlSection.id !== "suspects") {
+        setHighlightSuspectId(null)
+      }
     }
-  }, [searchParams, sectionId])
+
+    window.addEventListener("popstate", handlePopState)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, [])
 
   const section = useMemo(
     () => SECTIONS.find((s) => s.id === sectionId) ?? DEFAULT_SECTION,
     [sectionId],
   )
 
-  const navigateTo = useCallback(
-    (id: SectionId) => {
-      const target = SECTIONS.find((s) => s.id === id) ?? DEFAULT_SECTION
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(PARAM, target.slug)
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false })
-      setSectionId(target.id)
-      if (id !== "suspects") setHighlightSuspectId(null)
-    },
-    [router, pathname, searchParams],
-  )
+  const navigateTo = useCallback((id: SectionId) => {
+    const target = SECTIONS.find((s) => s.id === id) ?? DEFAULT_SECTION
+
+    // 1. Моментально переключаем UI.
+    // Без ожидания Next router, server navigation и RSC.
+    setSectionId(target.id)
+
+    if (target.id !== "suspects") {
+      setHighlightSuspectId(null)
+    }
+
+    // 2. Меняем URL нативно, без Next.js navigation.
+    const params = new URLSearchParams(window.location.search)
+    params.set(PARAM, target.slug)
+
+    const nextUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`
+
+    if (nextUrl !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+      window.history.pushState({ section: target.slug }, "", nextUrl)
+    }
+  }, [])
 
   const renderSection = () => {
     switch (sectionId) {
@@ -90,8 +118,10 @@ export function PageInner() {
         </div>
 
         <div className="mvd-stripe rounded-sm border border-border bg-card/40 p-3 sm:p-4 md:p-6">
-          <SectionSlugBar section={section} />
-          {renderSection()}
+          <div key={sectionId} data-section-panel>
+            <SectionSlugBar section={section} />
+            {renderSection()}
+          </div>
         </div>
       </main>
 

@@ -1,9 +1,9 @@
-import type { Metadata } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import { SessionLoader } from "@/components/mvd/session-loader"
 import { ThemeProvider } from "@/components/mvd/theme-provider"
 import { StoreProvider } from "@/lib/mvd/store"
-import { SessionLoader } from "@/components/mvd/session-loader"
+import { Analytics } from "@vercel/analytics/next"
+import type { Metadata } from "next"
+import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({
@@ -20,7 +20,6 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "АИС МВД РФ — Внутренняя система",
   description: "Автоматизированная информационная система МВД России",
-  generator: "v0.app",
 }
 
 export const viewport = {
@@ -29,7 +28,7 @@ export const viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#0a1428" },
   ],
   width: "device-width",
-  initialScale: 1,
+  initialScale: 1.5,
   maximumScale: 5,
 }
 
