@@ -41,6 +41,7 @@ export default function RootLayout({
     <html
       lang="ru"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${jetbrainsMono.variable} bg-background`}
     >
       <body className="font-sans antialiased">

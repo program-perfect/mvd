@@ -33,8 +33,8 @@ export function SectionSlugBar({ section }: { section: SectionMeta }) {
           type="button"
           onClick={() => copy(section.slug, "slug")}
           className="inline-flex h-5 w-5 items-center justify-center rounded-sm border border-transparent text-muted-foreground transition-colors hover:border-border hover:text-foreground"
-          aria-label="Скопировать slug раздела"
-          title="Скопировать slug"
+          aria-label="Скопировать слаг раздела"
+          title="Скопировать слаг"
         >
           {copied === "slug" ? <Check className="h-3 w-3 text-accent" /> : <Copy className="h-3 w-3" />}
         </button>

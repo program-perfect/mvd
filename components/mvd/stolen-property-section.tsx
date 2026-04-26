@@ -118,9 +118,9 @@ const items: Item[] = [
 ]
 
 const statusColor: Record<Item["status"], string> = {
-  Розыск: "bg-primary/15 text-primary ring-primary/40",
-  Найдено: "bg-accent/15 text-accent ring-accent/40",
-  "На экспертизе": "bg-muted text-muted-foreground ring-border",
+  Розыск: "bg-muted/60 font-bold text-primary ring-primary/40",
+  Найдено: "bg-muted/70 font-bold text-accent ring-accent/40",
+  "На экспертизе": "bg-muted font-bold text-muted-foreground ring-border",
 }
 
 interface Props {

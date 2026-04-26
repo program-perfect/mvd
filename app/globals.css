@@ -4,148 +4,179 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ======================================================
-   СВЕТЛАЯ ТЕМА (по умолчанию) — служебный белый интерфейс
+   СВЕТЛАЯ ТЕМА — служебный бело-синий интерфейс
    ====================================================== */
 :root {
-  --background: oklch(0.98 0.005 90); /* кремово-белый фон */
-  --foreground: oklch(0.22 0.03 250); /* тёмно-синий текст */
+  --background: oklch(0.985 0.006 250);
+  --foreground: oklch(0.22 0.035 255);
 
-  --card: oklch(1 0 0); /* чистая белая панель */
-  --card-foreground: oklch(0.22 0.03 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.035 255);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.03 250);
+  --popover-foreground: oklch(0.22 0.035 255);
 
-  --primary: oklch(0.5 0.2 28); /* служебный красный */
-  --primary-foreground: oklch(0.98 0.005 90);
+  /* Основной акцент: вместо красного — служебный синий */
+  --primary: oklch(0.48 0.16 255);
+  --primary-foreground: oklch(0.985 0.006 250);
 
-  --secondary: oklch(0.95 0.01 250);
-  --secondary-foreground: oklch(0.22 0.03 250);
+  --secondary: oklch(0.95 0.015 255);
+  --secondary-foreground: oklch(0.22 0.035 255);
 
-  --muted: oklch(0.95 0.01 250);
-  --muted-foreground: oklch(0.45 0.025 250);
+  --muted: oklch(0.95 0.012 255);
+  --muted-foreground: oklch(0.46 0.03 255);
 
-  --accent: oklch(0.62 0.14 75); /* латунный/золотистый */
-  --accent-foreground: oklch(0.22 0.03 250);
+  /* Вторичный акцент: холодный голубой, без золота/красного */
+  --accent: oklch(0.64 0.13 235);
+  --accent-foreground: oklch(0.18 0.035 255);
 
-  --destructive: oklch(0.55 0.22 28);
-  --destructive-foreground: oklch(0.98 0.005 90);
+  /* Ошибки оставлены приглушёнными, но не участвуют в основной палитре */
+  --destructive: oklch(0.55 0.18 28);
+  --destructive-foreground: oklch(0.985 0.006 250);
 
-  --border: oklch(0.88 0.015 250);
-  --input: oklch(0.92 0.012 250);
-  --ring: oklch(0.5 0.2 28);
+  --border: oklch(0.86 0.02 255);
+  --input: oklch(0.92 0.014 255);
+  --ring: oklch(0.48 0.16 255);
 
-  --chart-1: oklch(0.5 0.2 28);
-  --chart-2: oklch(0.62 0.14 75);
-  --chart-3: oklch(0.45 0.08 250);
-  --chart-4: oklch(0.7 0.02 250);
-  --chart-5: oklch(0.22 0.03 250);
+  --chart-1: oklch(0.48 0.16 255);
+  --chart-2: oklch(0.64 0.13 235);
+  --chart-3: oklch(0.42 0.08 260);
+  --chart-4: oklch(0.72 0.04 240);
+  --chart-5: oklch(0.25 0.04 255);
 
   --radius: 0.25rem;
 
   --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.22 0.03 250);
-  --sidebar-primary: oklch(0.5 0.2 28);
-  --sidebar-primary-foreground: oklch(0.98 0.005 90);
-  --sidebar-accent: oklch(0.95 0.01 250);
-  --sidebar-accent-foreground: oklch(0.22 0.03 250);
-  --sidebar-border: oklch(0.88 0.015 250);
-  --sidebar-ring: oklch(0.5 0.2 28);
+  --sidebar-foreground: oklch(0.22 0.035 255);
+  --sidebar-primary: oklch(0.48 0.16 255);
+  --sidebar-primary-foreground: oklch(0.985 0.006 250);
+  --sidebar-accent: oklch(0.95 0.015 255);
+  --sidebar-accent-foreground: oklch(0.22 0.035 255);
+  --sidebar-border: oklch(0.86 0.02 255);
+  --sidebar-ring: oklch(0.48 0.16 255);
 
   /* Сетка для фона */
-  --grid-line: oklch(0.22 0.03 250 / 0.06);
+  --grid-line: oklch(0.22 0.035 255 / 0.055);
+
+  /* Служебные дополнительные оттенки */
+  --mvd-blue-deep: oklch(0.28 0.08 255);
+  --mvd-blue: oklch(0.48 0.16 255);
+  --mvd-blue-soft: oklch(0.64 0.13 235);
+  --mvd-panel-tint: oklch(0.48 0.16 255 / 0.06);
+
+  /* Анимации */
+  --motion-fast: 120ms;
+  --motion-base: 180ms;
+  --motion-slow: 240ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ======================================================
-   ТЁМНАЯ ТЕМА — облегчённая (светло-серо-синяя)
+   ТЁМНАЯ ТЕМА — тёмно-синяя служебная
    ====================================================== */
 .dark {
-  --background: oklch(0.18 0.02 250);
-  --foreground: oklch(0.94 0.01 90);
+  --background: oklch(0.17 0.025 255);
+  --foreground: oklch(0.94 0.012 245);
 
-  --card: oklch(0.22 0.025 250);
-  --card-foreground: oklch(0.94 0.01 90);
+  --card: oklch(0.21 0.032 255);
+  --card-foreground: oklch(0.94 0.012 245);
 
-  --popover: oklch(0.22 0.025 250);
-  --popover-foreground: oklch(0.94 0.01 90);
+  --popover: oklch(0.21 0.032 255);
+  --popover-foreground: oklch(0.94 0.012 245);
 
-  --primary: oklch(0.55 0.18 28);
-  --primary-foreground: oklch(0.98 0.01 90);
+  --primary: oklch(0.62 0.16 245);
+  --primary-foreground: oklch(0.12 0.025 255);
 
-  --secondary: oklch(0.28 0.03 250);
-  --secondary-foreground: oklch(0.94 0.01 90);
+  --secondary: oklch(0.27 0.04 255);
+  --secondary-foreground: oklch(0.94 0.012 245);
 
-  --muted: oklch(0.26 0.025 250);
-  --muted-foreground: oklch(0.7 0.02 250);
+  --muted: oklch(0.25 0.034 255);
+  --muted-foreground: oklch(0.72 0.035 245);
 
-  --accent: oklch(0.62 0.14 75);
-  --accent-foreground: oklch(0.18 0.02 250);
+  --accent: oklch(0.68 0.13 230);
+  --accent-foreground: oklch(0.12 0.025 255);
 
-  --destructive: oklch(0.6 0.22 28);
+  --destructive: oklch(0.6 0.2 28);
   --destructive-foreground: oklch(0.98 0.01 90);
 
-  --border: oklch(0.32 0.03 250);
-  --input: oklch(0.28 0.03 250);
-  --ring: oklch(0.55 0.18 28);
+  --border: oklch(0.33 0.04 255);
+  --input: oklch(0.28 0.038 255);
+  --ring: oklch(0.62 0.16 245);
 
-  --chart-1: oklch(0.55 0.18 28);
-  --chart-2: oklch(0.62 0.14 75);
-  --chart-3: oklch(0.45 0.08 250);
-  --chart-4: oklch(0.7 0.02 250);
-  --chart-5: oklch(0.94 0.01 90);
+  --chart-1: oklch(0.62 0.16 245);
+  --chart-2: oklch(0.68 0.13 230);
+  --chart-3: oklch(0.48 0.1 260);
+  --chart-4: oklch(0.74 0.045 240);
+  --chart-5: oklch(0.94 0.012 245);
 
-  --sidebar: oklch(0.22 0.025 250);
-  --sidebar-foreground: oklch(0.94 0.01 90);
-  --sidebar-primary: oklch(0.55 0.18 28);
-  --sidebar-primary-foreground: oklch(0.98 0.01 90);
-  --sidebar-accent: oklch(0.28 0.03 250);
-  --sidebar-accent-foreground: oklch(0.94 0.01 90);
-  --sidebar-border: oklch(0.32 0.03 250);
-  --sidebar-ring: oklch(0.55 0.18 28);
+  --sidebar: oklch(0.21 0.032 255);
+  --sidebar-foreground: oklch(0.94 0.012 245);
+  --sidebar-primary: oklch(0.62 0.16 245);
+  --sidebar-primary-foreground: oklch(0.12 0.025 255);
+  --sidebar-accent: oklch(0.27 0.04 255);
+  --sidebar-accent-foreground: oklch(0.94 0.012 245);
+  --sidebar-border: oklch(0.33 0.04 255);
+  --sidebar-ring: oklch(0.62 0.16 245);
 
-  --grid-line: oklch(0.32 0.03 250 / 0.18);
+  --grid-line: oklch(0.5 0.06 245 / 0.14);
+
+  --mvd-blue-deep: oklch(0.22 0.05 255);
+  --mvd-blue: oklch(0.62 0.16 245);
+  --mvd-blue-soft: oklch(0.68 0.13 230);
+  --mvd-panel-tint: oklch(0.62 0.16 245 / 0.08);
 }
 
 @theme inline {
-  /* Дополнительные breakpoint'ы для предпланшетных/преддесктопных размеров */
-  --breakpoint-xs: 30rem; /* 480px — крупные смартфоны */
-  --breakpoint-sm: 40rem; /* 640px — мини-планшеты */
-  --breakpoint-md: 48rem; /* 768px — планшеты */
-  --breakpoint-lg: 64rem; /* 1024px — преддесктопные / большие планшеты */
-  --breakpoint-xl: 80rem; /* 1280px — десктоп */
-  --breakpoint-2xl: 96rem; /* 1536px — широкоформатные мониторы */
-  --breakpoint-3xl: 120rem; /* 1920px — Full HD и больше */
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-3xl: 120rem;
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
   --radius-sm: calc(var(--radius) - 1px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -160,10 +191,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   html {
-    /* Исключаем горизонтальный скролл на узких экранах */
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
+
   body {
     @apply bg-background text-foreground;
     background-image:
@@ -171,6 +204,7 @@
       linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+
   @media (min-width: 768px) {
     body {
       background-size: 32px 32px;
@@ -178,24 +212,31 @@
   }
 }
 
+/* ======================================================
+   СЛУЖЕБНЫЕ ЭФФЕКТЫ
+   ====================================================== */
+
 /* Лёгкое мерцание для индикатора статуса */
 @keyframes mvd-blink {
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
-    opacity: 0.35;
+    opacity: 0.45;
   }
 }
+
 .mvd-blink {
-  animation: mvd-blink 1.6s ease-in-out infinite;
+  animation: mvd-blink 1.8s ease-in-out infinite;
 }
 
-/* Сканлайны для эффекта служебного монитора (только тёмная тема) */
+/* Сканлайны только в тёмной теме */
 .dark .mvd-scanlines {
   position: relative;
 }
+
 .dark .mvd-scanlines::after {
   content: "";
   position: absolute;
@@ -205,8 +246,8 @@
     to bottom,
     transparent 0,
     transparent 3px,
-    oklch(0 0 0 / 0.06) 3px,
-    oklch(0 0 0 / 0.06) 4px
+    oklch(0 0 0 / 0.05) 3px,
+    oklch(0 0 0 / 0.05) 4px
   );
   mix-blend-mode: multiply;
 }
@@ -216,28 +257,29 @@
 .dark {
   color-scheme: light;
 }
+
 .dark {
   color-scheme: dark;
 }
 
 /* ======================================================
-   АКЦЕНТЫ — служебные элементы оформления
+   АКЦЕНТЫ — синие служебные элементы оформления
    ====================================================== */
 
-/* Служебные «уголки» в углах карточек (как на номерных бирках)
-   — четыре маленьких уголка на углах элемента. Появляются
-   только в активном/hover состоянии, чтобы не зашумлять. */
+/* Служебные уголки */
 .mvd-corner {
   --c-color: var(--border);
   --c-size: 8px;
   position: relative;
 }
+
 .mvd-corner::before,
 .mvd-corner::after,
 .mvd-corner > .mvd-corner-tl,
 .mvd-corner > .mvd-corner-br {
   content: "";
 }
+
 .mvd-corner::before,
 .mvd-corner::after {
   position: absolute;
@@ -246,33 +288,37 @@
   border-color: var(--c-color);
   border-style: solid;
   pointer-events: none;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-base) var(--motion-ease);
 }
+
 .mvd-corner::before {
   top: -1px;
   left: -1px;
   border-width: 1px 0 0 1px;
 }
+
 .mvd-corner::after {
-  bottom: -1px;
   right: -1px;
+  bottom: -1px;
   border-width: 0 1px 1px 0;
 }
+
 .mvd-corner.mvd-active,
 .mvd-corner:hover {
   --c-color: var(--primary);
 }
 
-/* Акцентная вертикальная полоса слева у служебного контейнера */
+/* Синяя вертикальная полоса слева у служебного контейнера */
 .mvd-stripe {
   position: relative;
 }
+
 .mvd-stripe::before {
   content: "";
   position: absolute;
-  left: 0;
   top: 12px;
   bottom: 12px;
+  left: 0;
   width: 2px;
   background: linear-gradient(
     to bottom,
@@ -286,17 +332,18 @@
   pointer-events: none;
 }
 
-/* Рейл-штрихи (как на служебном принтере) под служебной полоской */
+/* Рейл-штрихи под служебной полоской */
 .mvd-rail {
   position: relative;
   overflow: hidden;
 }
+
 .mvd-rail::after {
   content: "";
   position: absolute;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   height: 2px;
   background-image: repeating-linear-gradient(
     to right,
@@ -305,37 +352,41 @@
     transparent 6px,
     transparent 14px
   );
-  opacity: 0.35;
+  opacity: 0.32;
   pointer-events: none;
 }
 
-/* Длинная скан-линия, бегущая раз в 6 секунд по верху служебного контейнера */
+/* Длинная скан-линия */
 @keyframes mvd-scan {
   0% {
     transform: translateY(-100%);
     opacity: 0;
   }
-  10% {
-    opacity: 0.7;
+
+  12% {
+    opacity: 0.55;
   }
+
   100% {
     transform: translateY(2400%);
     opacity: 0;
   }
 }
+
 .mvd-scan {
   position: relative;
   overflow: hidden;
 }
+
 .mvd-scan::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
   top: 0;
+  right: 0;
+  left: 0;
   height: 1px;
   background: linear-gradient(to right, transparent, var(--accent) 50%, transparent);
-  animation: mvd-scan 6s linear infinite;
+  animation: mvd-scan 7s linear infinite;
   pointer-events: none;
 }
 
@@ -387,7 +438,7 @@ textarea,
 }
 
 /* ======================================================
-   АНИМАЦИИ — плавные появления / переходы
+   АНИМАЦИИ — спокойные, без мигания страницы
    ====================================================== */
 
 /* Базовый transition для интерактивных элементов */
@@ -399,64 +450,110 @@ textarea,
 [role="tab"],
 [role="button"] {
   transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease,
-    opacity 180ms ease;
+    background-color var(--motion-base) var(--motion-ease),
+    color var(--motion-base) var(--motion-ease),
+    border-color var(--motion-base) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease),
+    opacity var(--motion-base) var(--motion-ease);
 }
 
-@keyframes mvd-fade-in {
+/* Ссылки и табы не двигаем сильно, чтобы интерфейс не дёргался */
+button:hover,
+[role="button"]:hover,
+[role="tab"]:hover {
+  transform: translateY(-0.5px);
+}
+
+button:active,
+[role="button"]:active,
+[role="tab"]:active {
+  transform: translateY(0);
+}
+
+/* Анимация только для внутренней панели раздела */
+[data-section-panel] {
+  animation: section-in 120ms var(--motion-ease) both;
+}
+
+@keyframes section-in {
   from {
-    opacity: 0;
-    transform: translateY(4px);
+    opacity: 0.99;
+    transform: translateY(1px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+/* Мягкие локальные появления, без opacity: 0, чтобы не было вспышек */
+@keyframes mvd-fade-in {
+  from {
+    opacity: 0.96;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .mvd-fade-in {
-  animation: mvd-fade-in 280ms ease-out both;
+  animation: mvd-fade-in 180ms var(--motion-ease) both;
 }
 
 @keyframes mvd-rise {
   from {
-    opacity: 0;
-    transform: translateY(8px);
+    opacity: 0.96;
+    transform: translateY(3px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .mvd-rise {
-  animation: mvd-rise 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: mvd-rise 220ms var(--motion-ease) both;
 }
 
 @keyframes mvd-pop {
   from {
-    opacity: 0;
-    transform: scale(0.96);
+    opacity: 0.97;
+    transform: scale(0.992);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
+
 .mvd-pop {
-  animation: mvd-pop 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: mvd-pop 160ms var(--motion-ease) both;
 }
 
 /* Уважение к prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+
   .mvd-blink,
   .mvd-scan::before,
   .mvd-fade-in,
   .mvd-rise,
-  .mvd-pop {
-    animation: none;
+  .mvd-pop,
+  [data-section-panel] {
+    animation: none !important;
   }
 }
-

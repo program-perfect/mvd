@@ -168,17 +168,6 @@ export function ReportsSection() {
             />
           </FilterField>
 
-          <FilterField label="Статус">
-            <Select
-              value={status}
-              onChange={(v) => {
-                setStatus(v as ReportStatus | "all")
-                setPage(1)
-              }}
-              options={[{ value: "all", label: "Все статусы" }, ...REPORT_STATUSES.map((t) => ({ value: t, label: t }))]}
-            />
-          </FilterField>
-
           <FilterField label="Приоритет">
             <Select
               value={priority}
@@ -187,6 +176,17 @@ export function ReportsSection() {
                 setPage(1)
               }}
               options={[{ value: "all", label: "Любой" }, ...REPORT_PRIORITIES.map((t) => ({ value: t, label: t }))]}
+            />
+          </FilterField>
+
+          <FilterField label="Статус">
+            <Select
+              value={status}
+              onChange={(v) => {
+                setStatus(v as ReportStatus | "all")
+                setPage(1)
+              }}
+              options={[{ value: "all", label: "Все статусы" }, ...REPORT_STATUSES.map((t) => ({ value: t, label: t }))]}
             />
           </FilterField>
         </div>
