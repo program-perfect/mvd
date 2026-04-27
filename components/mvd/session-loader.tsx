@@ -1,9 +1,9 @@
 "use client"
 
+import { generateCipherKey, generateFingerprint } from "@/lib/mvd/session"
+import { useStore } from "@/lib/mvd/store"
 import { Lock, Shield } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useStore } from "@/lib/mvd/store"
-import { generateCipherKey, generateFingerprint } from "@/lib/mvd/session"
 
 const STEPS = [
   "Инициализация защищённого канала",
@@ -100,19 +100,19 @@ export function SessionLoader() {
           <div className="mt-3 space-y-1 border-t border-border pt-3 text-muted-foreground">
             <div className="flex items-start gap-2">
               <Lock className="mt-0.5 h-3 w-3 shrink-0 text-accent" aria-hidden="true" />
-              <span className="shrink-0">KEY</span>
+              <span className="shrink-0">КЛЮЧ</span>
               <span className="truncate text-foreground" suppressHydrationWarning>
                 {aesKey ? aesKey.slice(0, 32) + "…" : "—"}
               </span>
             </div>
             <div className="flex items-start gap-2">
-              <span className="ml-5 shrink-0">FP</span>
+              <span className="ml-5 shrink-0">ОТПЕЧАТОК</span>
               <span className="truncate text-foreground" suppressHydrationWarning>
                 {fp ? fp.slice(0, 32) + "…" : "—"}
               </span>
             </div>
             <div className="flex items-start gap-2">
-              <span className="ml-5 shrink-0">SES</span>
+              <span className="ml-5 shrink-0">СЕССИЯ</span>
               <span className="text-foreground" suppressHydrationWarning>
                 {sessionId || "—"}
               </span>

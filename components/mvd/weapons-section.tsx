@@ -1,5 +1,5 @@
-import Image from "next/image"
 import { Crosshair, ShieldAlert } from "lucide-react"
+import Image from "next/image"
 
 type Weapon = {
   id: string
@@ -66,10 +66,10 @@ const weapons: Weapon[] = [
 ]
 
 const statusStyles: Record<Weapon["status"], string> = {
-  "Зарегистрировано": "border-border bg-secondary text-muted-foreground",
-  "Изъято": "border-primary/60 bg-primary/10 text-primary",
-  "В розыске": "border-destructive/60 bg-destructive/10 text-destructive",
-  "На экспертизе": "border-primary/60 bg-primary/10 text-primary",
+  "Зарегистрировано": "font-bold border-border bg-secondary text-muted-foreground",
+  "Изъято": "bg-muted/70 font-bold border-primary/60 bg-primary/10 text-primary",
+  "В розыске": "bg-muted/70 font-bold border-destructive/60 bg-destructive/10 text-destructive",
+  "На экспертизе": "bg-muted/70 font-bold border-primary/60 bg-primary/10 text-primary",
 }
 
 export function WeaponsSection() {

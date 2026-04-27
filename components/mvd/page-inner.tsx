@@ -12,7 +12,7 @@ import { SystemHeader } from "@/components/mvd/system-header"
 import { WantedSection } from "@/components/mvd/wanted-section"
 import { WeaponsSection } from "@/components/mvd/weapons-section"
 import { DEFAULT_SECTION, SECTIONS, findSection } from "@/lib/mvd/sections-meta"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const PARAM = "section"
 
@@ -21,13 +21,13 @@ type PageInnerProps = {
 }
 
 export function PageInner({ initialSlug = null }: PageInnerProps) {
+  const contentRef = useRef<HTMLDivElement | null>(null)
+
   const initialSection = findSection(initialSlug) ?? DEFAULT_SECTION
 
   const [sectionId, setSectionId] = useState<SectionId>(initialSection.id)
   const [highlightSuspectId, setHighlightSuspectId] = useState<string | null>(null)
 
-  // Один раз после загрузки читаем текущий URL.
-  // Это нужно, если PageInner пока вызывается без initialSlug.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const urlSection = findSection(params.get(PARAM)) ?? DEFAULT_SECTION
@@ -35,7 +35,6 @@ export function PageInner({ initialSlug = null }: PageInnerProps) {
     setSectionId((current) => (current === urlSection.id ? current : urlSection.id))
   }, [])
 
-  // Поддержка кнопок браузера "назад/вперёд"
   useEffect(() => {
     function handlePopState() {
       const params = new URLSearchParams(window.location.search)
@@ -45,6 +44,17 @@ export function PageInner({ initialSlug = null }: PageInnerProps) {
 
       if (urlSection.id !== "suspects") {
         setHighlightSuspectId(null)
+      }
+
+      const isMobileOrTablet = window.matchMedia("(max-width: 1023px)").matches
+
+      if (isMobileOrTablet) {
+        window.requestAnimationFrame(() => {
+          contentRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+        })
       }
     }
 
@@ -60,27 +70,45 @@ export function PageInner({ initialSlug = null }: PageInnerProps) {
     [sectionId],
   )
 
-  const navigateTo = useCallback((id: SectionId) => {
-    const target = SECTIONS.find((s) => s.id === id) ?? DEFAULT_SECTION
+  const scrollToContentOnMobile = useCallback(() => {
+    const isMobileOrTablet = window.matchMedia("(max-width: 1023px)").matches
 
-    // 1. Моментально переключаем UI.
-    // Без ожидания Next router, server navigation и RSC.
-    setSectionId(target.id)
+    if (!isMobileOrTablet) return
 
-    if (target.id !== "suspects") {
-      setHighlightSuspectId(null)
-    }
-
-    // 2. Меняем URL нативно, без Next.js navigation.
-    const params = new URLSearchParams(window.location.search)
-    params.set(PARAM, target.slug)
-
-    const nextUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`
-
-    if (nextUrl !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
-      window.history.pushState({ section: target.slug }, "", nextUrl)
-    }
+    window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
+        contentRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }, 40)
+    })
   }, [])
+
+  const navigateTo = useCallback(
+    (id: SectionId) => {
+      const target = SECTIONS.find((s) => s.id === id) ?? DEFAULT_SECTION
+
+      setSectionId(target.id)
+
+      if (target.id !== "suspects") {
+        setHighlightSuspectId(null)
+      }
+
+      const params = new URLSearchParams(window.location.search)
+      params.set(PARAM, target.slug)
+
+      const nextUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`
+      const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`
+
+      if (nextUrl !== currentUrl) {
+        window.history.pushState({ section: target.slug }, "", nextUrl)
+      }
+
+      scrollToContentOnMobile()
+    },
+    [scrollToContentOnMobile],
+  )
 
   const renderSection = () => {
     switch (sectionId) {
@@ -117,7 +145,10 @@ export function PageInner({ initialSlug = null }: PageInnerProps) {
           <SectionNav active={sectionId} onSelect={navigateTo} />
         </div>
 
-        <div className="mvd-stripe rounded-sm border border-border bg-card/40 p-3 sm:p-4 md:p-6">
+        <div
+          ref={contentRef}
+          className="mvd-stripe scroll-mt-4 rounded-sm border border-border bg-card/40 p-3 sm:scroll-mt-5 sm:p-4 md:scroll-mt-6 md:p-6"
+        >
           <div key={sectionId} data-section-panel>
             <SectionSlugBar section={section} />
             {renderSection()}

@@ -169,17 +169,17 @@ export function SuspectsSection({ highlightId }: Props) {
               <Field label="Судимости" value={selected.priors} />
             </dl>
 
-            <div className="rounded-sm border border-primary/40 bg-primary/10 p-4">
+            <div className="rounded-sm border border-destructive/40 bg-destructive/10 p-4">
               <div className="flex items-start gap-2.5">
                 <AlertTriangle
-                  className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-destructive"
                   aria-hidden="true"
                 />
                 <div className="space-y-1.5">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-primary">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-destructive">
                     Квалификация
                   </p>
-                  <p className="font-sans text-sm font-semibold text-foreground">
+                  <p className="font-sans text-sm font-semibold text-destructive">
                     {selected.article}
                   </p>
                   <p className="text-pretty text-sm leading-relaxed text-foreground">

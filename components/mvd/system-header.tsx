@@ -19,38 +19,38 @@ const WEEKDAYS = [
 
 export function SystemHeader({ adminMode = false }: { adminMode?: boolean }) {
   const { sessionId } = useStore()
-  const [time, setTime] = useState<string>("")
+  // const [time, setTime] = useState<string>("")
   const [date, setDate] = useState<string>("")
   const [weekday, setWeekday] = useState<string>("")
-  const [tz, setTz] = useState<string>("")
+  // const [tz, setTz] = useState<string>("")
 
   useEffect(() => {
-    const detectTzAbbr = () => {
-      try {
-        const parts = new Intl.DateTimeFormat("ru-RU", {
-          timeZoneName: "short",
-        }).formatToParts(new Date())
-        const tzPart = parts.find((p) => p.type === "timeZoneName")?.value
-        if (tzPart) return tzPart
-      } catch {}
-      const offsetMin = -new Date().getTimezoneOffset()
-      const sign = offsetMin >= 0 ? "+" : "−"
-      const h = Math.floor(Math.abs(offsetMin) / 60)
-        .toString()
-        .padStart(2, "0")
-      const m = (Math.abs(offsetMin) % 60).toString().padStart(2, "0")
-      return `UTC${sign}${h}:${m}`
-    }
+    // const detectTzAbbr = () => {
+    //   try {
+    //     const parts = new Intl.DateTimeFormat("ru-RU", {
+    //       timeZoneName: "short",
+    //     }).formatToParts(new Date())
+    //     const tzPart = parts.find((p) => p.type === "timeZoneName")?.value
+    //     if (tzPart) return tzPart
+    //   } catch {}
+    //   const offsetMin = -new Date().getTimezoneOffset()
+    //   const sign = offsetMin >= 0 ? "+" : "−"
+    //   const h = Math.floor(Math.abs(offsetMin) / 60)
+    //     .toString()
+    //     .padStart(2, "0")
+    //   const m = (Math.abs(offsetMin) % 60).toString().padStart(2, "0")
+    //   return `UTC${sign}${h}:${m}`
+    // }
 
     const update = () => {
       const now = new Date()
-      setTime(
-        now.toLocaleTimeString("ru-RU", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        }),
-      )
+      // setTime(
+      //   now.toLocaleTimeString("ru-RU", {
+      //     hour: "2-digit",
+      //     minute: "2-digit",
+      //     second: "2-digit",
+      //   }),
+      // )
       setDate(
         now.toLocaleDateString("ru-RU", {
           day: "2-digit",
@@ -59,7 +59,7 @@ export function SystemHeader({ adminMode = false }: { adminMode?: boolean }) {
         }),
       )
       setWeekday(WEEKDAYS[now.getDay()])
-      setTz(detectTzAbbr())
+      // setTz(detectTzAbbr())
     }
     update()
     const id = setInterval(update, 1000)
@@ -125,11 +125,11 @@ export function SystemHeader({ adminMode = false }: { adminMode?: boolean }) {
           >
             <Clock className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
             <span className="tabular-nums">{date}</span>
-            <span className="text-muted-foreground">·</span>
-            <span className="tabular-nums">{time}</span>
+            {/* <span className="text-muted-foreground">·</span> */}
+            {/* <span className="tabular-nums">{time}</span>
             {tz && (
               <span className="hidden text-muted-foreground sm:inline">({tz})</span>
-            )}
+            )} */}
           </span>
           <span
             className="hidden text-muted-foreground xl:inline"
